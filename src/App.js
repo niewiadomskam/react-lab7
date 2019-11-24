@@ -1,9 +1,12 @@
 import React from 'react';
+import EmmployeeList from './EmployeeList';
+import EmmployeeForm from './EmployeeForm';
 
 function App() {
   return (
     <div>
-      Empty App
+      {/* <EmmployeeList /> */}
+      <EmmployeeForm />
     </div>
   );
 }
