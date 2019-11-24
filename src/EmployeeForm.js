@@ -102,7 +102,7 @@ render(){
                 <div style={{display:(this.state.isUnderaged? 'none' : 'block')}}>
                     <label>Email</label>
                     <input type="text" id="form_email" onChange={this.emailChanged} />
-                    <label style={{color : red , display : (this.state.isEmailValid? 'none' : 'block')}}>Email not valid</label>
+                    <label style={{color : 'red' , display : (this.state.isEmailValid? 'none' : 'block')}}>Email not valid</label>
                 </div>
                 <div style={{display:(this.state.isUnderaged? 'block' : 'none')}}>
                     <label>Parent Name</label>
@@ -111,7 +111,7 @@ render(){
                 <div style={{display:(this.state.isUnderaged? 'block' : 'none')}}>
                     <label>Parent Phone Number</label>
                     <input type="text" id="form_parent_phone_number" onChange={this.parentPhoneNumberChanged} />
-                    <label style={{color : red , display : (this.state.isPhoneNumberValid? 'none' : 'block')}}>Phone number not valid</label>
+                    <label style={{color : 'red' , display : (this.state.isPhoneNumberValid? 'none' : 'block')}}>Phone number not valid</label>
                 </div>
                 <input type="submit" value="Wyślij" onClick={this.handleSubmit} style={{enabled : (this.state.submitEnabled? 'true' : 'false')}} />
             </form>

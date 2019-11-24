@@ -5,7 +5,7 @@ import EmmployeeForm from './EmployeeForm';
 function App() {
   return (
     <div>
-      {/* <EmmployeeList /> */}
+      <EmmployeeList />
       <EmmployeeForm />
     </div>
   );
