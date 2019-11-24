@@ -11,6 +11,8 @@ class EmmployeeForm extends React.Component{
         this.emailChanged = this.emailChanged.bind(this);
         this.parentPhoneNumberChanged = this.parentPhoneNumberChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePhoneNumber = this.validatePhoneNumber.bind(this);
 
         this.state={
             age:0,
@@ -19,6 +21,8 @@ class EmmployeeForm extends React.Component{
             ParentPhoneNumber: '',
             ParentName: '',
             isUnderaged: false,
+            isEmailValid:true,
+            isPhoneNumberValid: true,
         }
     }
 
@@ -40,16 +44,35 @@ class EmmployeeForm extends React.Component{
         this.setState({ParentName : e.target.value})
     }
     emailChanged(e){
-        this.setState({Email: e.target.value})
+        //let emailValid = this.validateEmail(e.target.value);
+        this.setState({Email: e.target.value});
     }
     parentPhoneNumberChanged(e){
-        this.setState({ParentPhoneNumber: e.target.value})
+        //let phoneNumberValid = this.validatePhoneNumber(e.target.value);
+        this.setState({ParentPhoneNumber: e.target.value});
     }
 
     handleSubmit(event) {
         alert('Wysłano następujące wypracowanie: ' + this.state.age);
+        let emailValid = this.validateEmail(this.state.Email);
+        let phoneNumberValid = this.validatePhoneNumber(this.state.ParentPhoneNumber);
+        this.setState({isEmailValid : emailValid, isPhoneNumberValid : phoneNumberValid});
         event.preventDefault();
-      }
+    }
+
+    validateEmail(email){
+        let emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        return emailValid;
+
+    }
+    validatePhoneNumber(phoenNumber){
+        let isNumberValid = phoenNumber.length == 9;
+        if(isNumberValid)
+        {
+            isNumberValid = /^\d+$/.test(phoenNumber);
+        }
+        return isNumberValid;
+    }
 
 render(){
     return(
@@ -66,6 +89,7 @@ render(){
                 <div style={{display:(this.state.isUnderaged? 'none' : 'block')}}>
                     <label>Email</label>
                     <input type="text" id="form_email" onChange={this.emailChanged} />
+                    <label style={{color : red , display : (this.state.isEmailValid? 'none' : 'block')}}>Email not valid</label>
                 </div>
                 <div style={{display:(this.state.isUnderaged? 'block' : 'none')}}>
                     <label>Parent Name</label>
@@ -74,6 +98,7 @@ render(){
                 <div style={{display:(this.state.isUnderaged? 'block' : 'none')}}>
                     <label>Parent Phone Number</label>
                     <input type="text" id="form_parent_phone_number" onChange={this.parentPhoneNumberChanged} />
+                    <label style={{color : red , display : (this.state.isPhoneNumberValid? 'none' : 'block')}}>Phone number not valid</label>
                 </div>
                 <input type="submit" value="Wyślij" onClick={this.handleSubmit} />
             </form>
