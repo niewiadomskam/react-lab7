@@ -23,6 +23,7 @@ class EmmployeeForm extends React.Component{
             isUnderaged: false,
             isEmailValid:true,
             isPhoneNumberValid: true,
+            submitEnabled : true,
         }
     }
 
@@ -44,19 +45,31 @@ class EmmployeeForm extends React.Component{
         this.setState({ParentName : e.target.value})
     }
     emailChanged(e){
-        //let emailValid = this.validateEmail(e.target.value);
-        this.setState({Email: e.target.value});
+        let emailValid = this.validateEmail(e.target.value);
+        if(emailValid)
+        {
+            this.setState({Email: e.target.value, isEmailValid:emailValid, submitEnabled : true});
+        }
+        else{
+            
+            this.setState({Email: e.target.value, isEmailValid:emailValid, submitEnabled : false});
+        }
     }
     parentPhoneNumberChanged(e){
-        //let phoneNumberValid = this.validatePhoneNumber(e.target.value);
-        this.setState({ParentPhoneNumber: e.target.value});
+        let phoneNumberValid = this.validatePhoneNumber(e.target.value);
+        if(phoneNumberValid)
+        {
+            this.setState({ParentPhoneNumber: e.target.value, isPhoneNumberValid: phoneNumberValid, submitEnabled : true});
+        }
+        else{
+            this.setState({ParentPhoneNumber: e.target.value, isPhoneNumberValid: phoneNumberValid, submitEnabled : false});
+        }
     }
 
     handleSubmit(event) {
-        alert('Wysłano następujące wypracowanie: ' + this.state.age);
-        let emailValid = this.validateEmail(this.state.Email);
-        let phoneNumberValid = this.validatePhoneNumber(this.state.ParentPhoneNumber);
-        this.setState({isEmailValid : emailValid, isPhoneNumberValid : phoneNumberValid});
+        // let emailValid = this.validateEmail(this.state.Email);
+        // let phoneNumberValid = this.validatePhoneNumber(this.state.ParentPhoneNumber);
+        // this.setState({isEmailValid : emailValid, isPhoneNumberValid : phoneNumberValid});
         event.preventDefault();
     }
 
@@ -100,7 +113,7 @@ render(){
                     <input type="text" id="form_parent_phone_number" onChange={this.parentPhoneNumberChanged} />
                     <label style={{color : red , display : (this.state.isPhoneNumberValid? 'none' : 'block')}}>Phone number not valid</label>
                 </div>
-                <input type="submit" value="Wyślij" onClick={this.handleSubmit} />
+                <input type="submit" value="Wyślij" onClick={this.handleSubmit} style={{enabled : (this.state.submitEnabled? 'true' : 'false')}} />
             </form>
         </div>
     )
